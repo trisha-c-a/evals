@@ -111,6 +111,8 @@ class ModelSpecs:
     def completion(self) -> ModelSpec:
         if self.completions_ is None:
             raise ValueError("Completion model was not specified")
+        if len(self.completions_) != 1:
+            raise ValueError("ModelSpecs.completion only works with a single completion model")
         return self.completions_[0]
 
     @property
@@ -120,7 +122,7 @@ class ModelSpecs:
         return self.completions_
 
     @property
-    def names(self) -> dict[str, Sequence[str]]:
+    def names(self) -> Dict[str, Sequence[str]]:
         dict = {}
         if self.completions_ is not None:
             dict["completions"] = [model.name for model in self.completions_]
@@ -134,7 +136,7 @@ class ModelSpecs:
 @dataclass
 class RunSpec:
     model_name: str
-    model_names: dict[str, Sequence[str]]
+    model_names: Dict[str, Sequence[str]]
     eval_name: str
     base_eval: str
     split: str

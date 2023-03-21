@@ -123,14 +123,14 @@ class ModelSpecs:
 
     @property
     def names(self) -> Dict[str, Sequence[str]]:
-        dict = {}
+        d = {}
         if self.completions_ is not None:
-            dict["completions"] = [model.name for model in self.completions_]
+            d["completions"] = [model.name for model in self.completions_]
         if self.embedding_ is not None:
-            dict["embedding"] = [self.embedding_.name]
+            d["embedding"] = [self.embedding_.name]
         if self.ranking_ is not None:
-            dict["ranking"] = [self.ranking_.name]
-        return dict
+            d["ranking"] = [self.ranking_.name]
+        return d
 
 
 @dataclass
